@@ -9,7 +9,9 @@ resource "aws_iam_group" "devops" {
 resource "aws_iam_policy" "S3-policy" {
   name        = "S3-policy"
   description = "A test policy"
-  policy      = "Version": "2012-10-17",
+  policy      = <<EOF
+{
+"Version": "2012-10-17",
     "Statement": [
         {
             "Effect": "Allow",
@@ -17,11 +19,12 @@ resource "aws_iam_policy" "S3-policy" {
             "Resource": "*"
         }
     ]
+
+}
+EOF
 }
 
-resource "aws_iam_group_policy_attachment" "S3-policy" {
-  group      = "${aws_iam_group.group.name}"
-  policy_arn = "${aws_iam_policy.policy.arn}"
-}
-
+resource "aws_iam_group_policy_attachment" "S3-policy-attach" {
+  group      = aws_iam_group.devops.name
+  policy_arn = aws_iam_policy.S3-policy.arn
 }
