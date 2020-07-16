@@ -28,3 +28,8 @@ resource "aws_iam_group_policy_attachment" "S3-policy-attach" {
   group      = aws_iam_group.devops.name
   policy_arn = aws_iam_policy.S3-policy.arn
 }
+
+resource "aws_iam_user" "users" {
+  count = length(var.iamusers)
+  name  = var.iamusers[count.index]
+}
