@@ -1,4 +1,4 @@
-varable "iamusers" {
-    type = "list"
+variable "iamusers" {
+    type = list
     default = ["naresh", "suresh", "ramesh", "mahesh"]
 }
