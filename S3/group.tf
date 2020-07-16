@@ -36,7 +36,7 @@ resource "aws_iam_user" "users" {
 
 resource "aws_iam_user_group_membership" "devops" {
   count = length(var.iamusers)
-  name  = var.iamusers[count.index]
+  user  = var.iamusers[count.index]
   groups = [
     "${aws_iam_group.devops.name}",
       ]
